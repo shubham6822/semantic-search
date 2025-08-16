@@ -1,30 +1,88 @@
-# Glassy UI search
+# Semantic Search with Glassy UI
 
-*Automatically synced with your [v0.app](https://v0.app) deployments*
+A modern, responsive semantic search interface built with Next.js and Tailwind CSS, featuring a stunning glassy UI design and smooth animations.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/shubhams-projects-f4ccf9b9/v0-glassy-ui-search)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/projects/HIi1f74oL4i)
+[![Built with Next.js](https://img.shields.io/badge/Built%20with-Next.js-black?style=for-the-badge&logo=next.js)](https://nextjs.org)
+[![Styled with Tailwind](https://img.shields.io/badge/Styled%20with-Tailwind-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com)
 
-## Overview
+## Features
 
-This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+- 🎨 Modern glassy UI design with backdrop blur effects
+- ✨ Smooth animations and transitions
+- 🔍 Real-time search functionality
+- 📱 Fully responsive design
+- 🌈 Letter glitch animation effects
+- ⚡ Fast and optimized performance
 
-## Deployment
+## Tech Stack
 
-Your project is live at:
+- **Framework:** Next.js
+- **Styling:** Tailwind CSS
+- **Icons:** Lucide Icons
+- **Animations:** Custom CSS animations
 
-**[https://vercel.com/shubhams-projects-f4ccf9b9/v0-glassy-ui-search](https://vercel.com/shubhams-projects-f4ccf9b9/v0-glassy-ui-search)**
+## Getting Started
 
-## Build your app
+1. Clone the repository:
 
-Continue building your app on:
+```bash
+git clone https://github.com/shubham6822/semantic-search.git
+```
 
-**[https://v0.app/chat/projects/HIi1f74oL4i](https://v0.app/chat/projects/HIi1f74oL4i)**
+2. Install dependencies:
 
-## How It Works
+```bash
+npm install
+# or
+pnpm install
+```
 
-1. Create and modify your project using [v0.app](https://v0.app)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+3. Run the development server:
+
+```bash
+npm run dev
+# or
+pnpm dev
+```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
+
+## Project Structure
+
+- `app/` - Main application code and pages
+- `components/` - Reusable UI components
+- `public/` - Static assets
+- `styles/` - Global styles and Tailwind configuration
+
+## Features in Detail
+
+### Glassy UI
+
+The application features a modern glassy UI with:
+
+- Backdrop blur effects
+- Subtle border highlights
+- Dynamic hover states
+- Smooth transitions
+
+### Search Functionality
+
+- Real-time search updates
+- Loading state with animated spinner
+- Animated search results
+- Mock data integration (ready for API integration)
+
+### Animations
+
+- Letter glitch effects
+- Fade-in animations
+- Scale transitions
+- Smooth hover effects
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
