@@ -1,7 +1,6 @@
 "use client";
 
 import type React from "react";
-
 import { useState } from "react";
 import { Search } from "lucide-react";
 import LetterGlitch from "@/components/LetterGlitch";
@@ -64,25 +63,51 @@ export default function Home() {
         </div>
 
         {/* Search Bar */}
-        <div className="relative mb-8 animate-fade-in-up animation-delay-200">
-          <div className="absolute inset-0 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 shadow-2xl animate-glow"></div>
-          <div className="relative flex items-center">
-            <Search className="absolute left-6 h-6 w-6 text-gray-300 animate-pulse" />
+        <div className="relative mb-8 animate-fade-in-up animation-delay-200 z-20">
+          <div
+            className="group flex items-center h-16 w-full
+      rounded-2xl 
+      bg-[rgba(17,17,17,0.7)]
+      backdrop-blur-2xl 
+      border border-[rgba(255,255,255,0.1)]
+      shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]
+      before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-b before:from-white/5 before:to-transparent
+      after:content-[''] after:absolute after:inset-0 after:rounded-2xl after:bg-gradient-to-t after:from-white/5 after:via-transparent after:to-transparent
+      relative
+      overflow-hidden
+      hover:bg-[rgba(23,23,23,0.8)]
+      transition-all duration-300"
+          >
+            <Search className="ml-6 h-6 w-6 text-gray-200" />
             <input
               type="text"
               value={query}
               onChange={handleInputChange}
               placeholder="Search anything..."
-              className="w-full h-16 pl-16 pr-6 bg-transparent border-0 outline-none text-lg  placeholder:text-gray-400 text-white transition-all duration-300 focus:scale-[1.02]"
+              className="w-full h-full pl-4 pr-6 
+      bg-transparent 
+      border-0 outline-none 
+      text-lg 
+      placeholder:text-gray-300 text-white font-medium"
             />
           </div>
         </div>
 
         {/* Search Results */}
         {(isSearching || results.length > 0) && (
-          <div className="relative animate-fade-in-up animation-delay-400 h-96 overflow-y-auto rounded-2xl border border-white/20 bg-white/5 shadow-2xl">
-            <div className="absolute inset-0 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 shadow-2xl animate-glow-subtle"></div>
-            <div className="relative p-6">
+          <div className="relative animate-fade-in-up animation-delay-400 h-96 rounded-2xl">
+            <div
+              className="fixed-wrapper absolute inset-0 
+              bg-[rgba(17,17,17,0.7)]
+              backdrop-blur-2xl 
+              rounded-2xl 
+              border border-[rgba(255,255,255,0.1)]
+              shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]
+              before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-b before:from-white/5 before:to-transparent
+              after:content-[''] after:absolute after:inset-0 after:rounded-2xl after:bg-gradient-to-t after:from-white/5 after:via-transparent after:to-transparent
+              z-0"
+            ></div>
+            <div className="relative p-6 overflow-y-auto max-h-96 z-10">
               {isSearching ? (
                 <div className="flex items-center justify-center py-8">
                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-400"></div>
@@ -96,13 +121,25 @@ export default function Home() {
                   {results.map((result, index) => (
                     <div
                       key={index}
-                      className="group cursor-pointer p-4 rounded-xl bg-white/5 hover:bg-white/15 transition-all duration-300 border border-white/10 hover:border-white/30 hover:scale-[1.02] animate-fade-in-up"
+                      className="group cursor-pointer p-4 rounded-xl 
+                        bg-[rgba(255,255,255,0.03)]
+                        hover:bg-[rgba(255,255,255,0.07)]
+                        backdrop-blur-md
+                        transition-all duration-300 
+                        border border-[rgba(255,255,255,0.1)]
+                        hover:border-[rgba(255,255,255,0.2)]
+                        hover:scale-[1.02] 
+                        animate-fade-in-up
+                        shadow-[0_4px_16px_0_rgba(0,0,0,0.2)]
+                        hover:shadow-[0_8px_24px_0_rgba(0,0,0,0.3)]
+                        before:content-[''] before:absolute before:inset-0 before:rounded-xl before:bg-gradient-to-b before:from-white/5 before:to-transparent
+                        relative overflow-hidden"
                       style={{ animationDelay: `${index * 100}ms` }}
                     >
-                      <div className=" text-gray-200 group-hover:text-blue-300 transition-colors duration-300">
+                      <div className="text-gray-200 group-hover:text-blue-300 transition-colors duration-300">
                         {result}
                       </div>
-                      <div className=" text-sm text-gray-500 mt-1">
+                      <div className="text-sm text-gray-500 mt-1">
                         https://example.com/search?q=
                         {encodeURIComponent(query)}
                       </div>
