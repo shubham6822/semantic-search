@@ -63,51 +63,23 @@ export default function Home() {
         </div>
 
         {/* Search Bar */}
-        <div className="relative mb-8 animate-fade-in-up animation-delay-200 z-20">
-          <div
-            className="group flex items-center h-16 w-full
-      rounded-2xl 
-      bg-[rgba(17,17,17,0.7)]
-      backdrop-blur-2xl 
-      border border-[rgba(255,255,255,0.1)]
-      shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]
-      before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-b before:from-white/5 before:to-transparent
-      after:content-[''] after:absolute after:inset-0 after:rounded-2xl after:bg-gradient-to-t after:from-white/5 after:via-transparent after:to-transparent
-      relative
-      overflow-hidden
-      hover:bg-[rgba(23,23,23,0.8)]
-      transition-all duration-300"
-          >
-            <Search className="ml-6 h-6 w-6 text-gray-200" />
+        <div className="relative mb-8 animate-fade-in-up animation-delay-200 glassmorphism shadow-2xl animate-glow rounded-2xl">
+          <div className="relative flex items-center h-16">
+            <Search className="absolute left-6 h-6 w-6 text-gray-300 animate-pulse z-10" />
             <input
               type="text"
               value={query}
               onChange={handleInputChange}
               placeholder="Search anything..."
-              className="w-full h-full pl-4 pr-6 
-      bg-transparent 
-      border-0 outline-none 
-      text-lg 
-      placeholder:text-gray-300 text-white font-medium"
+              className="w-full h-16 pl-16 pr-6 bg-transparent border-0 outline-none text-lg placeholder:text-gray-400 text-white transition-all duration-300 focus:scale-[1.02] rounded-2xl"
             />
           </div>
         </div>
 
         {/* Search Results */}
         {(isSearching || results.length > 0) && (
-          <div className="relative animate-fade-in-up animation-delay-400 h-96 rounded-2xl">
-            <div
-              className="fixed-wrapper absolute inset-0 
-              bg-[rgba(17,17,17,0.7)]
-              backdrop-blur-2xl 
-              rounded-2xl 
-              border border-[rgba(255,255,255,0.1)]
-              shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]
-              before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-b before:from-white/5 before:to-transparent
-              after:content-[''] after:absolute after:inset-0 after:rounded-2xl after:bg-gradient-to-t after:from-white/5 after:via-transparent after:to-transparent
-              z-0"
-            ></div>
-            <div className="relative p-6 overflow-y-auto max-h-96 z-10">
+          <div className="relative animate-fade-in-up animation-delay-400 h-[calc(100vh-20rem)] overflow-y-auto rounded-2xl glassmorphism shadow-2xl animate-glow-subtle custom-scrollbar">
+            <div className="relative p-6 z-10">
               {isSearching ? (
                 <div className="flex items-center justify-center py-8">
                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-400"></div>
