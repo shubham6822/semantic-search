@@ -44,6 +44,26 @@ export const movieData: MovieData[] = [
     description:
       "The story of Henry Hill and his life in the mob, covering his relationship with his wife Karen Hill and his mob partners.",
   },
+  {
+    title: "Fight Club",
+    description:
+      "An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into an anarchist organization.",
+  },
+  {
+    title: "The Lord of the Rings: The Fellowship of the Ring",
+    description:
+      "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.",
+  },
+  {
+    title: "Star Wars: Episode IV - A New Hope",
+    description:
+      "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empire's world-destroying battle station.",
+  },
+  {
+    title: "Interstellar",
+    description:
+      "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival on a dying Earth.",
+  },
 ];
 
 export const generateMockSearchResults = (query: string): string[] => {
@@ -57,4 +77,20 @@ export const generateMockSearchResults = (query: string): string[] => {
     `${query} community discussions`,
     `Latest news about ${query}`,
   ];
+};
+
+export const searchMovies = (query: string): MovieData[] => {
+  if (!query.trim()) {
+    return [];
+  }
+
+  const lowercaseQuery = query.toLowerCase();
+
+  return movieData.filter((movie) => {
+    const titleMatch = movie.title.toLowerCase().includes(lowercaseQuery);
+    const descriptionMatch = movie.description
+      .toLowerCase()
+      .includes(lowercaseQuery);
+    return titleMatch || descriptionMatch;
+  });
 };

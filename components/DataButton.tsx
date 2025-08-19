@@ -13,7 +13,7 @@ export default function DataButton({ onClick }: DataButtonProps) {
     >
       <Database className="h-5 w-5 text-white group-hover:text-blue-300 transition-colors duration-300" />
       <span className="ml-2 text-white text-sm font-medium group-hover:text-blue-300 transition-colors duration-300">
-        Data
+        Data Set
       </span>
     </button>
   );

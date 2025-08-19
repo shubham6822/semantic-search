@@ -1,42 +1,63 @@
 "use client";
 
 import type React from "react";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import LetterGlitch from "@/components/LetterGlitch";
 import DataButton from "@/components/DataButton";
 import DataDrawer from "@/components/DataDrawer";
 import SearchBar from "@/components/SearchBar";
 import SearchResults from "@/components/SearchResults";
-import { generateMockSearchResults } from "@/lib/data";
+import { searchMovies, type MovieData } from "@/lib/data";
 
 export default function Home() {
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<string[]>([]);
+  const [results, setResults] = useState<MovieData[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  // Debounced search function
+  const debouncedSearch = useCallback((searchQuery: string) => {
+    const timeoutId = setTimeout(() => {
+      handleSearch(searchQuery);
+    }, 300); // 300ms debounce delay
+
+    return () => clearTimeout(timeoutId);
+  }, []);
 
   const handleSearch = async (searchQuery: string) => {
     if (!searchQuery.trim()) {
       setResults([]);
+      setIsSearching(false);
       return;
     }
 
     setIsSearching(true);
 
-    // Simulate search delay
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    // Simulate search delay for better UX
+    await new Promise((resolve) => setTimeout(resolve, 300));
 
-    // Generate mock search results
-    const mockResults = generateMockSearchResults(searchQuery);
+    // Search through movie data
+    const movieResults = searchMovies(searchQuery);
 
-    setResults(mockResults);
+    setResults(movieResults);
     setIsSearching(false);
   };
+
+  // Effect to handle debounced search
+  useEffect(() => {
+    if (query.trim()) {
+      const cleanup = debouncedSearch(query);
+      return cleanup;
+    } else {
+      setResults([]);
+      setIsSearching(false);
+    }
+  }, [query, debouncedSearch]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setQuery(value);
-    handleSearch(value);
+    // Debounced search will be triggered by useEffect
   };
 
   return (
