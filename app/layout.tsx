@@ -12,6 +12,9 @@ const jost = Jost({
 export const metadata: Metadata = {
   title: "Semantic Search",
   description: "A simple semantic search application",
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export default function RootLayout({
