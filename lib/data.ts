@@ -1,5 +1,3 @@
-import { ai, supabase } from "./utils";
-
 export interface MovieData {
   title: string;
   description: string;
@@ -79,29 +77,4 @@ export const generateMockSearchResults = (query: string): string[] => {
     `${query} community discussions`,
     `Latest news about ${query}`,
   ];
-};
-
-export const searchMovies = async (query: string): Promise<MovieData[]> => {
-  if (!query.trim()) {
-    return [];
-  }
-
-  console.log("Searching for:", query);
-
-  const response: any = await ai.models.embedContent({
-    model: "gemini-embedding-001",
-    contents: query,
-  });
-
-  const queryVector = response?.embeddings[0]?.values ?? [];
-
-  // Find matching movies
-  const { data } = await supabase.rpc("match_movies", {
-    query_embedding: queryVector,
-    match_threshold: 0.5,
-    match_count: 3,
-  });
-  console.log("Found movies:", data);
-
-  return data;
 };

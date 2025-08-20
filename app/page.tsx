@@ -7,9 +7,8 @@ import DataButton from "@/components/DataButton";
 import DataDrawer from "@/components/DataDrawer";
 import SearchBar from "@/components/SearchBar";
 import SearchResults from "@/components/SearchResults";
-import { movieData, searchMovies, type MovieData } from "@/lib/data";
-import { GoogleGenAI } from "@google/genai";
-import { supabase } from "@/lib/utils";
+import { MovieData } from "@/lib/data";
+import { searchMovies } from "@/lib/server.action";
 
 interface MovieDataVector {
   title: string;
