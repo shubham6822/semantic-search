@@ -1,3 +1,5 @@
+import { ai, supabase } from "./utils";
+
 export interface MovieData {
   title: string;
   description: string;
@@ -79,18 +81,27 @@ export const generateMockSearchResults = (query: string): string[] => {
   ];
 };
 
-export const searchMovies = (query: string): MovieData[] => {
+export const searchMovies = async (query: string): Promise<MovieData[]> => {
   if (!query.trim()) {
     return [];
   }
 
-  const lowercaseQuery = query.toLowerCase();
+  console.log("Searching for:", query);
 
-  return movieData.filter((movie) => {
-    const titleMatch = movie.title.toLowerCase().includes(lowercaseQuery);
-    const descriptionMatch = movie.description
-      .toLowerCase()
-      .includes(lowercaseQuery);
-    return titleMatch || descriptionMatch;
+  const response: any = await ai.models.embedContent({
+    model: "gemini-embedding-001",
+    contents: query,
   });
+
+  const queryVector = response?.embeddings[0]?.values ?? [];
+
+  // Find matching movies
+  const { data } = await supabase.rpc("match_movies", {
+    query_embedding: queryVector,
+    match_threshold: 0.5,
+    match_count: 3,
+  });
+  console.log("Found movies:", data);
+
+  return data;
 };

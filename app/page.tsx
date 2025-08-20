@@ -23,52 +23,38 @@ export default function Home() {
   const [results, setResults] = useState<MovieData[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [isDBCalled, setIsDBCalled] = useState(false);
-  const [data, setData] = useState<MovieDataVector[]>([]);
+  const [hasSearched, setHasSearched] = useState(false);
 
   // Debounced search function
-  const debouncedSearch = useCallback((searchQuery: string) => {
-    const timeoutId = setTimeout(() => {
-      handleSearch(searchQuery);
-    }, 300); // 300ms debounce delay
-
-    return () => clearTimeout(timeoutId);
-  }, []);
-
-  const handleSearch = async (searchQuery: string) => {
-    if (!searchQuery.trim()) {
+  const handleSearch = useCallback(async () => {
+    if (!query.trim()) {
       setResults([]);
       setIsSearching(false);
+      setHasSearched(true);
       return;
     }
 
     setIsSearching(true);
+    setHasSearched(true);
 
     // Simulate search delay for better UX
     await new Promise((resolve) => setTimeout(resolve, 300));
 
     // Search through movie data
-    const movieResults = searchMovies(searchQuery);
+    const movieResults = await searchMovies(query);
 
     setResults(movieResults);
     setIsSearching(false);
-  };
+  }, [query]);
 
-  // Effect to handle debounced search
-  useEffect(() => {
-    if (query.trim()) {
-      const cleanup = debouncedSearch(query);
-      return cleanup;
-    } else {
-      setResults([]);
-      setIsSearching(false);
-    }
-  }, [query, debouncedSearch]);
+  // Effect to handle search - removed automatic search
+  // Search is now only triggered by button click or Enter key
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setQuery(value);
-    // Debounced search will be triggered by useEffect
+    // Don't clear results or reset hasSearched when typing
+    // Results will only show after explicit search action
   };
 
   // async function main() {
@@ -160,12 +146,16 @@ export default function Home() {
           </h1>
         </div>
 
-        <SearchBar query={query} onQueryChange={handleInputChange} />
+        <SearchBar
+          query={query}
+          onQueryChange={handleInputChange}
+          onSearch={handleSearch}
+        />
 
         <SearchResults
           isSearching={isSearching}
-          results={results}
-          query={query}
+          results={hasSearched ? results : []}
+          query={hasSearched ? query : ""}
         />
       </div>
     </div>
