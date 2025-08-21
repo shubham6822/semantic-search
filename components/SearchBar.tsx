@@ -19,7 +19,7 @@ export default function SearchBar({
   };
 
   return (
-    <div className="relative mb-8 animate-fade-in-up animation-delay-200 glassmorphism shadow-2xl animate-glow rounded-2xl">
+    <div className="relative mb-8 animate-fade-in-up animation-delay-200 glassmorphism glass-effect shadow-2xl animate-glow rounded-2xl">
       <div className="relative flex items-center h-16">
         <Search className="absolute left-6 h-6 w-6 text-gray-300 animate-pulse z-10" />
         <input

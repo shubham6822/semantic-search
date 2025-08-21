@@ -13,21 +13,23 @@ export default function DataDrawer({ isOpen, onClose }: DataDrawerProps) {
       {/* Drawer Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 drawer-overlay z-40 transition-opacity duration-300"
+          className="fixed inset-0 drawer-overlay glass-overlay z-40 transition-opacity duration-300"
           onClick={onClose}
         />
       )}
 
       {/* Drawer */}
       <div
-        className={`fixed top-0 right-0 h-full w-96 glassmorphism shadow-2xl z-50 transform transition-transform duration-300 ease-in-out border-l border-[rgba(255,255,255,0.2)] ${
+        className={`fixed top-0 right-0 h-full w-96 glassmorphism glass-effect shadow-2xl z-50 transform transition-transform duration-300 ease-in-out border-l border-[rgba(255,255,255,0.2)] ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
-        style={{
-          background: "rgba(255, 255, 255, 0.1)",
-          backdropFilter: "blur(24px)",
-          WebkitBackdropFilter: "blur(24px)",
-        }}
+        style={
+          {
+            background: "rgba(255, 255, 255, 0.1)",
+            backdropFilter: "blur(24px)",
+            WebkitBackdropFilter: "blur(24px)",
+          } as React.CSSProperties
+        }
       >
         <div className="p-6 h-full flex flex-col">
           {/* Drawer Header */}

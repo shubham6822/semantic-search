@@ -124,6 +124,25 @@
   body {
     @apply bg-background text-foreground font-sans;
   }
+
+  /* Robust glassmorphism effects */
+  .glassmorphism,
+  .glass-effect {
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .drawer-overlay,
+  .glass-overlay {
+    backdrop-filter: blur(2px) !important;
+    -webkit-backdrop-filter: blur(2px) !important;
+    background: rgba(0, 0, 0, 0.2) !important;
+  }
 }
 
 @layer utilities {
@@ -131,29 +150,34 @@
 
   /* Ensure backdrop-filter works consistently */
   .backdrop-blur-xl {
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
     /* Fallback for browsers without backdrop-filter support */
     background-color: rgba(255, 255, 255, 0.1);
   }
 
-  /* Force backdrop filter rendering */
+  /* Force backdrop filter rendering with stronger specificity */
   .glassmorphism {
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
     /* Force GPU acceleration */
-    transform: translateZ(0);
-    will-change: transform;
+    transform: translateZ(0) !important;
+    will-change: transform !important;
+    /* Additional browser support */
+    -ms-backdrop-filter: blur(24px) !important;
+    -moz-backdrop-filter: blur(24px) !important;
   }
 
   /* Overlay that preserves background visibility */
   .drawer-overlay {
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
-    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(2px) !important;
+    -webkit-backdrop-filter: blur(2px) !important;
+    -ms-backdrop-filter: blur(2px) !important;
+    -moz-backdrop-filter: blur(2px) !important;
+    background: rgba(0, 0, 0, 0.2) !important;
   }
 
   /* Custom Scrollbar Styles */
